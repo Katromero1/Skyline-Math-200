@@ -1,0 +1,175 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Katromero1/Skyline-Math-200/blob/main/codebook%20bronco\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "jf8JwlyHKtvy"
+      },
+      "outputs": [],
+      "source": [
+        "import pandas as pd\n",
+        "import seaborn as sns\n",
+        "import matplotlib.pyplot as plt\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "link = 'https://raw.githubusercontent.com/Katromero1/Skyline-Math-200/main/Copy%20of%20Ford%20Bronco%20Values%20Over%20Time%20Kat_Romero%20-%20Sheet1.csv'\n",
+        "bronco_df= pd.read_csv(link)"
+      ],
+      "metadata": {
+        "id": "zayQry5EXW5d"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "bronco_df"
+      ],
+      "metadata": {
+        "id": "IbrQWFpG9hxV"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "bronco_df.corr()"
+      ],
+      "metadata": {
+        "id": "S5zUxmXX9k1X"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "sns.heatmap( bronco_df.corr(), vmin= -1 , vmax= 1, annot = True)"
+      ],
+      "metadata": {
+        "id": "Kfmbgg_mAyKU"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "sns.scatterplot(x='Car_Age', y ='CAR_PRICE', data = bronco_df)"
+      ],
+      "metadata": {
+        "id": "rtQA2CSbCueS"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "sns.scatterplot(x='MILEAGE', y ='CAR_PRICE', data = bronco_df)"
+      ],
+      "metadata": {
+        "id": "agC_yz7-BOU6"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "sns.regplot(x ='Car_Age', y ='CAR_PRICE', data = bronco_df)"
+      ],
+      "metadata": {
+        "id": "iqjeL0w-Rs17"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "sns.regplot(x ='MILEAGE', y ='CAR_PRICE', data = bronco_df)"
+      ],
+      "metadata": {
+        "id": "EKjFZ6ilVLpz"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import statsmodels.api as sm\n",
+        "from statsmodels.formula.api import ols"
+      ],
+      "metadata": {
+        "id": "poYzmpu2SDy7"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "Y = bronco_df['Car_Age']\n",
+        "X = bronco_df['CAR_PRICE']\n",
+        "X = sm.add_constant(X)\n",
+        "\n",
+        "reg_Equation = sm.OLS(Y,X ).fit()\n",
+        "print(reg_Equation.summary())"
+      ],
+      "metadata": {
+        "id": "ahRkVggqScfV"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "Y = bronco_df['MILEAGE']\n",
+        "X = bronco_df['CAR_PRICE']\n",
+        "X = sm.add_constant(X)\n",
+        "\n",
+        "reg_Equation = sm.OLS(Y,X ).fit()\n",
+        "print(reg_Equation.summary())"
+      ],
+      "metadata": {
+        "id": "YCo_ACPSV_2b"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
